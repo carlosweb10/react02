@@ -1,17 +1,31 @@
-//import logo from './logo.svg';
-//import './App.css';
-import AppForm from './componente/AppForm';
-//import C01Componente from './pagina/C01Componente';
+import React from 'react'
+import {Link,Route,BrowserRouter as Router,Routes } from 'react-router-dom'
+import {useAuth} from "./ruteo/AuthContext"
+import { auth } from './conexion/firebase'
+import BarraRutasProtected from './ruteo/BarraRutasProtected'
+import BarraRutasPublic from './ruteo/BarraRutasPublic'
+import Home from './public/Home'
+import Dashboard from './public/Dashboard'
+import Noticias from './public/Noticias'
+import Informacion from './public/Informacion'
+import 'react-toastify/dist/ReactToastify.css'
+import {toast} from 'react-toastify'
+import {ToastContainer} from 'react-toastify'
 
-function App() {
+const App = () => {
+  const {user} = useAuth();
+
   return (
-    <div style={{width:"350px", background:"greenyellow", padding:"10px"}}>
-        <AppForm />
-        <p>N. 1 - Manuel Juan Guerra Luna </p>
-        <p>N. 1 - Manuel Roman Lopez </p>
+    <div>
+      
+      <Router>
+      {user ? <BarraRutasProtected/>:<BarraRutasPublic/>}
+        
+      </Router>
 
+     
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
